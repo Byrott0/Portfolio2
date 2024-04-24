@@ -1,7 +1,7 @@
 import java.util.Comparator;
 import java.util.Scanner;
 
-public class Main {
+public class Main implements Wijziginginterface{
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -26,11 +26,14 @@ public class Main {
             Medicijn medicijn = new Medicijn(naam, innameTijd);
             medicijnLijst.addMedicijn(medicijn);
         }
+         {
 
-        // Medicijnen editen
+
+        //Medicijnen editen
         System.out.println("Wil je nog iets editen voordat ik de reminders aanmaak? (ja/nee)");
         if (scanner.nextLine().equals("ja")) {
             while (true) {
+
                 // Geef overzicht van alle medicijnen
                 for (Medicijn medicijn : medicijnLijst.getMedicijnen()) {
                     System.out.println("ID: " + medicijn.getId() + " Naam: " + medicijn.getNaam() + " Innametijd: " + medicijn.getInnameTijd());
@@ -58,17 +61,19 @@ public class Main {
                 if (scanner.nextLine().equals("nee")) {
                     break;
                 }
+                }
+
+
             }
 
         }
 
         // Dit sorteert onze medicijnen op basis van de inname tijd.
-        medicijnLijst.
-                getMedicijnen()
-                .sort(Comparator.comparingLong(Medicijn::getInnameTijdVerschilMS));
+        medicijnLijst.getMedicijnen().sort(Comparator.comparingLong(Medicijn::getInnameTijdVerschilMS));
 
         Bevestiging bevestiging = new Bevestiging();
 
+        bevestiging.wijziging(medicijnLijst);
         bevestiging.bevestigRegistratie();
 
         System.out.println(bevestiging.getMessage());
@@ -106,6 +111,10 @@ public class Main {
 
     }
 
+    @Override
+    public void wijzigMedicijn(MedicijnLijst medicijnLijst) {
+
     }
+}
 
 
