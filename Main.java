@@ -115,6 +115,7 @@ public class Main implements Wijziginginterface{
     public void wijzigMedicijn(MedicijnLijst medicijnLijst) {
 
     }
+
 }
 
 
