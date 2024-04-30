@@ -23,3 +23,4 @@ public class Reminder {
         System.out.println("Het is tijd om " + medicijn.getNaam() + " in te nemen");
     }
 }
+//
