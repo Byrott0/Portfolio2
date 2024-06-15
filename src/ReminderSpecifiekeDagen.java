@@ -21,7 +21,9 @@ public class ReminderSpecifiekeDagen extends HerinneringWekelijks {
 
     @Override
     protected void registreerMelding(LocalDateTime volgendeInname) {
-        System.out.println("Het is tijd om " + medicijn.getNaam() + " in te nemen op " + volgendeInname);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd 'Tijd =' HH:mm");
+        String formatDateTime = volgendeInname.format(formatter);
+        System.out.println("Het is tijd om " + medicijn.getNaam() + " in te nemen op " + formatDateTime);
     }
 
     @Override
