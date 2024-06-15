@@ -1,9 +1,26 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicijnLijst {
+public class MedicijnLijst implements Subject {
     private List<Medicijn> medicijnen = new ArrayList<>();
     private List<Observer> observers = new ArrayList<>();
+
+    @Override
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update(medicijnen);
+        }
+    }
 
     public void addMedicijn(Medicijn medicijn) {
         medicijnen.add(medicijn);
@@ -26,19 +43,5 @@ public class MedicijnLijst {
 
     public List<Medicijn> getMedicijnen() {
         return medicijnen;
-    }
-
-    public void addObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update(medicijnen);
-        }
     }
 }

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class MedicijnController {
     private final List<Medicijn> medicijnen;
@@ -9,10 +9,8 @@ public class MedicijnController {
         this.medicijnen = new ArrayList<>();
     }
 
-    public Medicijn maakMedicijn() {
-        Scanner scanner = new Scanner(System.in);
-        String naam = scanner.nextLine() + (this.medicijnen.size() + 1);
-        Medicijn medicijn = new Medicijn(naam);
+    public Medicijn maakMedicijn(String naam) {
+        Medicijn medicijn = new Medicijn(naam + (this.medicijnen.size() + 1));
         this.medicijnen.add(medicijn);
         return medicijn;
     }
