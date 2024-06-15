@@ -5,10 +5,12 @@ import java.util.UUID;
 public class Medicijn {
     private String naam;
     private final int id;
+    private String innameTijd;
 
     public Medicijn(String naam) {
         this.naam = naam;
         this.id = UUID.randomUUID().hashCode();
+        this.innameTijd = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     public String getNaam() {
@@ -24,10 +26,20 @@ public class Medicijn {
     }
 
     public String getInnameTijd() {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+        return innameTijd;
     }
 
     public void wijzigInnameTijd(String innameTijd) {
+        this.innameTijd = innameTijd;
         System.out.println("Innametijd gewijzigd naar: " + innameTijd);
+    }
+
+    @Override
+    public String toString() {
+        return " Medicijn " +
+                "naam='" + naam + '\'' +
+                ", id=" + id +
+                ", innameTijd='" + innameTijd + '\'' +
+                ' ';
     }
 }

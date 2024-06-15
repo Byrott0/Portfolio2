@@ -4,15 +4,15 @@ public class VeranderingNotificatie implements Observer {
 
     private String bericht;
 
-
-    private void toonBericht() {
-        System.out.println("VeranderingNotificatie: " + bericht);
-    }
-
     @Override
     public void update(List<Medicijn> medicijnen) {
-
+        if (!medicijnen.isEmpty()) {
+            bericht = "Medicijnlijst is gewijzigd: " + medicijnen;
+            toonBericht();
+        }
     }
 
-    // Eventueel meer methodes om de notificatie te verwerken, bijvoorbeeld opslaan in een logboek of een GUI-update.
+    private void toonBericht() {
+        System.out.println("Melding: " + bericht);
+    }
 }

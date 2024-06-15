@@ -10,14 +10,14 @@ public abstract class HerinneringWekelijks {
 
     public long zetHerinneringMelding() {
         LocalDateTime nu = LocalDateTime.now();
-        // Voor herinneringen op specifieke dagen, moet je de volgende inname tijd berekenen op basis van de specifieke dagen
-        LocalDateTime volgendeInname = nu.plusDays(1); // Bereken de volgende inname tijd
+        LocalDateTime volgendeInname = bepaalVolgendeInnameTijd(nu);
+        registreerMelding(volgendeInname);
         return ChronoUnit.MILLIS.between(nu, volgendeInname);
     }
 
-    abstract boolean bepaalinnameTijd();
+    protected abstract LocalDateTime bepaalVolgendeInnameTijd(LocalDateTime nu);
 
-    abstract void registreerMelding(LocalDateTime volgendeInname);
+    protected abstract void registreerMelding(LocalDateTime volgendeInname);
 
-    abstract void stelHerinneringSpecifiekeDagen(LocalDateTime volgendeInname);
+    public abstract void stelHerinneringSpecifiekeDagen(LocalDateTime volgendeInname);
 }

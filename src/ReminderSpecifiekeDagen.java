@@ -13,32 +13,19 @@ public class ReminderSpecifiekeDagen extends HerinneringWekelijks {
     }
 
     @Override
-    boolean bepaalinnameTijd() {
+    protected LocalDateTime bepaalVolgendeInnameTijd(LocalDateTime nu) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime innameTijdLocal = LocalTime.parse(innameTijd, formatter);
-        LocalTime now = LocalTime.now();
-
-        // Compare the current time with the intake time
-        if (now.isAfter(innameTijdLocal)) {
-            return true;
-        } else {
-            return false;
-        }
+        return nu.with(innameTijdLocal).plusDays(dagen);
     }
 
     @Override
-    void registreerMelding(LocalDateTime volgendeInname) {
-        System.out.println("Het is tijd om " + medicijn.getNaam() + " in te nemen");
+    protected void registreerMelding(LocalDateTime volgendeInname) {
+        System.out.println("Het is tijd om " + medicijn.getNaam() + " in te nemen op " + volgendeInname);
     }
 
     @Override
-    public long zetHerinneringMelding() {
-        return dagen * 24 * 60 * 60 * 1000L;
-    }
-
-    @Override
-    void stelHerinneringSpecifiekeDagen(LocalDateTime volgendeInname) {
-
+    public void stelHerinneringSpecifiekeDagen(LocalDateTime volgendeInname) {
         System.out.println("Ik ga wachten in dagen: " + dagen);
     }
 }

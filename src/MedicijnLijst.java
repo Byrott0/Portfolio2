@@ -1,14 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicijnLijst implements Subject { // dit staat voor de class medicijn
-
-    private final ArrayList<Medicijn> medicijnen = new ArrayList<>(); //final variabel doet dat je de variabel constant blijft
-    // en in een arraylist zorgt het ervoor dat je niet kan verwijzen naar een andere lijst maar juist specifiek naar deze
-
-    private final ArrayList<Observer> observers = new ArrayList<>(); //dit is een lijst van observers
-
-    private final MedicijnController medicijnController = new MedicijnController();
+public class MedicijnLijst {
+    private List<Medicijn> medicijnen = new ArrayList<>();
+    private List<Observer> observers = new ArrayList<>();
 
     public void addMedicijn(Medicijn medicijn) {
         medicijnen.add(medicijn);
@@ -16,39 +11,34 @@ public class MedicijnLijst implements Subject { // dit staat voor de class medic
     }
 
     public void removeMedicijn(int id) {
+        medicijnen.removeIf(medicijn -> medicijn.getId() == id);
+        notifyObservers();
+    }
+
+    public Medicijn getMedicijnById(int id) {
         for (Medicijn medicijn : medicijnen) {
             if (medicijn.getId() == id) {
-                medicijnen.remove(medicijn);
-                notifyObservers();
-                return;
+                return medicijn;
             }
         }
+        return null;
     }
 
-    public ArrayList<Medicijn> getMedicijnen() {
+    public List<Medicijn> getMedicijnen() {
         return medicijnen;
     }
-    //dit is een getter die de medicijnen teruggeeft
 
-    //een specifiek Medicijn object te vinden en terug te geven op basis van zijn id.
-    public Medicijn getMedicijnById(int id) {
-        return medicijnController.getMedicijnById(id);
-    }
-
-    @Override
     public void addObserver(Observer observer) {
         observers.add(observer);
     }
 
-    @Override
     public void removeObserver(Observer observer) {
         observers.remove(observer);
     }
 
-    @Override
     public void notifyObservers() {
         for (Observer observer : observers) {
-            observer.update(new ArrayList<>(medicijnen));
+            observer.update(medicijnen);
         }
     }
 }
