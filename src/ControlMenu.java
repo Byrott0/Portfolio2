@@ -1,14 +1,20 @@
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class ControlMenu implements Observer {
     private MedicijnWijziger medicijnWijziger;
     private WijzigingBevestigd wijzigingBevestigd;
+    private VeranderingNotificatie veranderingNotificatie;
+    private Set<Integer> gemeldeMedicijnen; // Set om bij te houden welke medicijnen al zijn gemeld
 
     public ControlMenu() {
         this.medicijnWijziger = new MedicijnWijziger();
         this.wijzigingBevestigd = new WijzigingBevestigd();
+        this.veranderingNotificatie = new VeranderingNotificatie();
+        this.gemeldeMedicijnen = new HashSet<>();
     }
 
     public boolean login() {
@@ -29,7 +35,7 @@ public class ControlMenu implements Observer {
 
             MedicijnController medicijnController = new MedicijnController();
             MedicijnLijst medicijnLijst = new MedicijnLijst();
-            medicijnLijst.addObserver(this);
+            medicijnLijst.addObserver(veranderingNotificatie);
 
             int geregistreerdeMedicijnen = 0;
             while (geregistreerdeMedicijnen < aantalMedicijnen) {
@@ -52,16 +58,17 @@ public class ControlMenu implements Observer {
 
                 HerinneringWekelijks herinnering = null;
 
+                int dagen = 0;
                 switch (keuze) {
                     case 1:
                         System.out.println("Over hoeveel dagen wil je dat de herinnering wordt ingesteld?");
                         if (scanner.hasNextInt()) {
-                            int dagen = scanner.nextInt();
+                            dagen = scanner.nextInt();
                             scanner.nextLine();  // Consume newline
                             herinnering = new ReminderSpecifiekeDagen(nieuwMedicijn, innameTijd, dagen);
                             herinnering.stelHerinneringSpecifiekeDagen(LocalDateTime.now().plusDays(dagen));
                         } else {
-                            System.out.println("Ongeldig. Voer een geldig cijfer in.");
+                            System.out.println("Ongeldig. Voer een geldig cijfer in");
                             scanner.nextLine();
                         }
                         break;
@@ -86,9 +93,15 @@ public class ControlMenu implements Observer {
                 }
             }
 
+            // Voeg observer toe voor wijzigingen na de initiële toevoeging
+            medicijnLijst.addObserver(this);
+
             // Wijzig medicijnen en notify observers als er wijzigingen zijn aangebracht
             if (medicijnWijziger.wijzigMedicijn(medicijnLijst)) {
                 wijzigingBevestigd.setStatus(true);
+                System.out.println(wijzigingBevestigd.getMessage());
+            } else {
+                // Toon wijzigingsbevestiging als er geen wijzigingen zijn aangebracht
                 System.out.println(wijzigingBevestigd.getMessage());
             }
 
@@ -101,5 +114,15 @@ public class ControlMenu implements Observer {
     @Override
     public void update(List<Medicijn> medicijnen) {
         System.out.println("Medicijnlijst is gewijzigd: " + medicijnen);
+    }
+
+    // Methode om te controleren of een medicijn al gemeld is
+    private boolean isMedicijnGemeld(Medicijn medicijn) {
+        return gemeldeMedicijnen.contains(medicijn.getId());
+    }
+
+    // Methode om een medicijn als gemeld te markeren
+    private void markeerMedicijnAlsGemeld(Medicijn medicijn) {
+        gemeldeMedicijnen.add(medicijn.getId());
     }
 }
