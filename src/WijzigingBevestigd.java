@@ -1,5 +1,5 @@
 public class WijzigingBevestigd {
-    private String message;
+    private final String message;
     private boolean status;
 
     public WijzigingBevestigd() {

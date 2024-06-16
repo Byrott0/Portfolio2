@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControlMenu {
-    private MedicijnWijziger medicijnWijziger;
-    private WijzigingBevestigd wijzigingBevestigd;
-    private VeranderingNotificatie veranderingNotificatie;
-    private List<Medicijn> gemeldeMedicijnen;
-    private MedicijnController medicijnController;
-    private LoginService loginService;
-    private MedicijnLijst medicijnLijst;
+    private final MedicijnWijziger medicijnWijziger;
+    private final WijzigingBevestigd wijzigingBevestigd;
+    private final VeranderingNotificatie veranderingNotificatie;
+    private final List<Medicijn> gemeldeMedicijnen;
+    private final MedicijnController medicijnController;
+    private final LoginService loginService;
+    private final MedicijnLijst medicijnLijst;
 
     public ControlMenu(MedicijnWijziger medicijnWijziger, WijzigingBevestigd wijzigingBevestigd, MedicijnLijst medicijnLijst, MedicijnController medicijnController, LoginService loginService) {
         this.medicijnWijziger = medicijnWijziger;

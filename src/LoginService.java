@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class LoginService {
-    private GebruikerBeheer gebruikerBeheer;
-    private MedicijnBeheer medicijnBeheer;
+    private final GebruikerBeheer gebruikerBeheer;
+    private final MedicijnBeheer medicijnBeheer;
 
     public LoginService(GebruikerBeheer gebruikerBeheer, MedicijnBeheer medicijnBeheer) {
         this.gebruikerBeheer = gebruikerBeheer;

@@ -3,8 +3,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class ReminderSpecifiekeDagen extends HerinneringWekelijks {
-    private String innameTijd;
-    private int dagen;
+    private final String innameTijd;
+    private final int dagen;
 
     public ReminderSpecifiekeDagen(Medicijn medicijn, String innameTijd, int dagen) {
         super(medicijn);

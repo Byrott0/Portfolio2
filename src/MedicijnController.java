@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class MedicijnController {
     private final List<Medicijn> medicijnen;
 
@@ -10,7 +9,7 @@ public class MedicijnController {
     }
 
     public Medicijn maakMedicijn(String naam) {
-        Medicijn medicijn = new Medicijn(naam + (this.medicijnen.size() + 1));
+        Medicijn medicijn = new Medicijn(naam);
         this.medicijnen.add(medicijn);
         return medicijn;
     }

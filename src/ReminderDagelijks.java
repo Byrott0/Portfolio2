@@ -3,7 +3,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class ReminderDagelijks extends HerinneringWekelijks {
-    private String innameTijd;
+    private final String innameTijd;
 
     public ReminderDagelijks(Medicijn medicijn, String innameTijd) {
         super(medicijn);
