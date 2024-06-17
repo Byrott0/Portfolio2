@@ -14,16 +14,4 @@ public class MedicijnController {
         return medicijn;
     }
 
-    public List<Medicijn> getMedicijnen() {
-        return this.medicijnen;
-    }
-
-    public Medicijn getMedicijnById(int id) {
-        for (Medicijn medicijn : medicijnen) {
-            if (medicijn.getId() == id) {
-                return medicijn;
-            }
-        }
-        return null;
-    }
 }

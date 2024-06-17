@@ -15,7 +15,7 @@ public class MedicijnBeheer {
 
         System.out.println("Hoeveel medicijnen wil je registreren?");
         int aantalMedicijnen = scanner.nextInt();
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
 
         for (int i = 0; i < aantalMedicijnen; i++) {
             System.out.println("Voer de naam van het medicijn in:");
@@ -25,7 +25,7 @@ public class MedicijnBeheer {
             System.out.println("1. ReminderSpecifiekeDagen");
             System.out.println("2. ReminderDagelijks");
             int keuze = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
+            scanner.nextLine();
 
             System.out.println("Voer de inname tijd in (HH:mm formaat)");
             String innameTijd = scanner.nextLine();
@@ -41,7 +41,7 @@ public class MedicijnBeheer {
                     System.out.println("Over hoeveel dagen wil je dat de herinnering wordt ingesteld?");
                     if (scanner.hasNextInt()) {
                         int dagen = scanner.nextInt();
-                        scanner.nextLine();  // Consume newline
+                        scanner.nextLine();
                         herinnering = new ReminderSpecifiekeDagen(nieuwMedicijn, innameTijd, dagen);
                         herinnering.stelHerinneringSpecifiekeDagen(LocalDateTime.now().plusDays(dagen));
                     } else {

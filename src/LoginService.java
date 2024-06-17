@@ -3,10 +3,18 @@ import java.util.Scanner;
 public class LoginService {
     private final GebruikerBeheer gebruikerBeheer;
     private final MedicijnBeheer medicijnBeheer;
+    private ControlMenu controlMenu;
 
-    public LoginService(GebruikerBeheer gebruikerBeheer, MedicijnBeheer medicijnBeheer) {
+    public LoginService(GebruikerBeheer gebruikerBeheer, MedicijnBeheer medicijnBeheer, ControlMenu controlMenu) {
         this.gebruikerBeheer = gebruikerBeheer;
         this.medicijnBeheer = medicijnBeheer;
+        this.controlMenu = controlMenu;
+    }
+    public void voerLoginUit() {
+        boolean isLoggedIn = controlMenu.login();
+        if (!isLoggedIn) {
+            System.out.println("Login mislukt.");
+        }
     }
 
     public boolean login() {

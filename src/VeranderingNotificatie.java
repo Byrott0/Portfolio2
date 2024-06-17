@@ -15,4 +15,8 @@ public class VeranderingNotificatie implements Observer {
     private void toonBericht() {
         System.out.println("Melding: " + bericht);
     }
+
+    public void notifyChange(String text) {
+        System.out.println("Melding: " + text);
+    }
 }
