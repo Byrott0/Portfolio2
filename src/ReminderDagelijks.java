@@ -3,11 +3,15 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class ReminderDagelijks extends HerinneringWekelijks {
-    private final String innameTijd;
 
     public ReminderDagelijks(Medicijn medicijn, String innameTijd) {
         super(medicijn);
         this.innameTijd = innameTijd;
+    }
+
+    @Override
+    protected void keuzeBevestiging() {
+        System.out.println("ReminderDagelijks ingesteld");
     }
 
     @Override
@@ -28,8 +32,4 @@ public class ReminderDagelijks extends HerinneringWekelijks {
         System.out.println("Het is tijd om " + medicijn.getNaam() + " in te nemen op " + formatDateTime);
     }
 
-    @Override
-    public void stelHerinneringSpecifiekeDagen(LocalDateTime volgendeInname) {
-        // Deze methode is niet relevant voor deze klasse
-    }
 }

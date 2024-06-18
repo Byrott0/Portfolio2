@@ -11,9 +11,7 @@ public class GebruikerBeheer {
         System.out.println("Voer je wachtwoord in");
         String wachtwoord = scanner.nextLine();
 
-        gebruiker = new Gebruiker();
-        gebruiker.register(naam, wachtwoord);
-
+        gebruiker = new Gebruiker(naam, wachtwoord);
         return gebruiker;
     }
 }

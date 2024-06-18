@@ -20,6 +20,7 @@ public class MedicijnBeheer {
         for (int i = 0; i < aantalMedicijnen; i++) {
             System.out.println("Voer de naam van het medicijn in:");
             String medicijnNaam = scanner.nextLine();
+            Medicijn nieuwMedicijn = medicijnController.maakMedicijn(medicijnNaam);
 
             System.out.println("Kies een type herinnering:");
             System.out.println("1. ReminderSpecifiekeDagen");
@@ -30,39 +31,39 @@ public class MedicijnBeheer {
             System.out.println("Voer de inname tijd in (HH:mm formaat)");
             String innameTijd = scanner.nextLine();
 
-            Medicijn nieuwMedicijn = medicijnController.maakMedicijn(medicijnNaam);
             nieuwMedicijn.wijzigInnameTijd(innameTijd);
             medicijnLijst.addMedicijn(nieuwMedicijn);
 
-            HerinneringWekelijks herinnering = null;
+            reminderInstellen(keuze, nieuwMedicijn, innameTijd, scanner);
+        }
+    }
 
-            switch (keuze) {
-                case 1:
-                    System.out.println("Over hoeveel dagen wil je dat de herinnering wordt ingesteld?");
-                    if (scanner.hasNextInt()) {
-                        int dagen = scanner.nextInt();
-                        scanner.nextLine();
-                        herinnering = new ReminderSpecifiekeDagen(nieuwMedicijn, innameTijd, dagen);
-                        herinnering.stelHerinneringSpecifiekeDagen(LocalDateTime.now().plusDays(dagen));
-                    } else {
-                        System.out.println("Ongeldig. Voer een geldig cijfer in");
-                        scanner.nextLine();
-                    }
-                    break;
-                case 2:
-                    herinnering = new ReminderDagelijks(nieuwMedicijn, innameTijd);
-                    long wachttijd = herinnering.zetHerinneringMelding();
-                    System.out.println("De wachttijd voor de volgende inname is: " + wachttijd / 60000 + " minuten");
-                    break;
-                default:
-                    System.out.println("Ongeldige keuze. Standaard ingesteld op ReminderSpecifiekeDagen.");
-                    herinnering = new ReminderSpecifiekeDagen(nieuwMedicijn, innameTijd, 1);
-                    break;
-            }
+    public void reminderInstellen(int keuze, Medicijn nieuwMedicijn, String innameTijd, Scanner scanner){
+        HerinneringWekelijks herinnering = null;
 
-            if (herinnering != null) {
-                herinnering.zetHerinneringMelding();
-            }
+        switch (keuze) {
+            case 1:
+                System.out.println("Over hoeveel dagen wil je dat de herinnering wordt ingesteld?");
+                if (scanner.hasNextInt()) {
+                    int dagen = scanner.nextInt();
+                    scanner.nextLine();
+                    herinnering = new ReminderSpecifiekeDagen(nieuwMedicijn, innameTijd, dagen);
+                } else {
+                    System.out.println("Ongeldig. Voer een geldig cijfer in");
+                    scanner.nextLine();
+                }
+                break;
+            case 2:
+                herinnering = new ReminderDagelijks(nieuwMedicijn, innameTijd);
+                break;
+            default:
+                System.out.println("Ongeldige keuze. Standaard ingesteld op ReminderSpecifiekeDagen.");
+                herinnering = new ReminderSpecifiekeDagen(nieuwMedicijn, innameTijd, 1);
+                break;
+        }
+
+        if (herinnering != null) {
+            herinnering.zetHerinneringMelding();
         }
     }
 }

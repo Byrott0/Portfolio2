@@ -5,11 +5,7 @@ public class Gebruiker {
     private String wachtwoord;
     private int id;
 
-    public Gebruiker() {
-        this.id = UUID.randomUUID().hashCode();
-    }
-
-    public void register(String naam, String wachtwoord) {
+    public Gebruiker(String naam, String wachtwoord) {
         this.naam = naam;
         this.wachtwoord = wachtwoord;
         this.id = UUID.randomUUID().hashCode();
