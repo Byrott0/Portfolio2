@@ -23,7 +23,7 @@ public class ControlMenu {
     public boolean login() {
         if (loginService.login()) {
             medicijnWijziger.setMedicijnLijst(medicijnLijst);
-            if (medicijnWijziger.verwijderOfWijzigMedicijn()) {
+            if (medicijnWijziger.WijzigMedicijn()) {
                 wijzigingBevestigd.setStatus(true);
                 System.out.println(wijzigingBevestigd.getMessage());
                 veranderingNotificatie.notifyChange("Login geslaagd en medicaties gewijzigd.");
