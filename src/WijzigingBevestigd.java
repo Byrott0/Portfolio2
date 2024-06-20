@@ -11,7 +11,6 @@ public class WijzigingBevestigd {
         return message;
     }
 
-
     public void setStatus(boolean status) {
         this.status = status;
     }

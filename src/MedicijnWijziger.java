@@ -1,32 +1,29 @@
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class MedicijnWijziger {
     private MedicijnLijst medicijnLijst;
     private WijzigingBevestigd wijzigingBevestigd = new WijzigingBevestigd();
 
-    public boolean WijzigMedicijn() {
-        Scanner scanner = new Scanner(System.in);
-
+    public boolean WijzigMedicijn(Scanner scanner) {
         System.out.println("Wil je nog iets wijzigen voordat ik de reminders aanmaak? (ja/nee)");
         if (scanner.nextLine().equalsIgnoreCase("ja")) {
             while (true) {
                 printAlleMedicijnen();
                 System.out.println("Voer het ID in van de medicijn waarvan je de naam en tijd wilt wijzigen.");
                 int id = scanner.nextInt();
-                scanner.nextLine(); // consume the leftover newline
+                scanner.nextLine();
 
                 Medicijn medicijn = medicijnLijst.getMedicijnById(id);
                 if (medicijn == null) {
                     System.out.println("Medicijn niet gevonden");
                 } else {
-                    System.out.println("Weet u zeker dat u een medicijn wilt wijzigen? (ja/nee)");
+                    System.out.println("Weet u zeker dat u een medicijn wilt wijzigen?");
                     if (scanner.nextLine().equalsIgnoreCase("ja")) {
                         wijzigMedicijn(medicijn, scanner);
                         System.out.println("Wilt u nog een medicijn wijzigen? (ja/nee)");
-                        if (scanner.nextLine().equalsIgnoreCase("nee")) {
-                            break;
-                        }
-                    } else {
+                    }
+                    if (scanner.nextLine().equalsIgnoreCase("nee")) {
                         break;
                     }
                 }

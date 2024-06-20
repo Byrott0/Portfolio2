@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -18,44 +19,50 @@ public class MedicijnWijzigerTest {
         medicijnLijst = new MedicijnLijst();
         wijziger.setMedicijnLijst(medicijnLijst);
 
-        // Adding a default Medicijn object to the list for testing
         Medicijn medicijn = new Medicijn("Test Medicijn");
         medicijnLijst.addMedicijn(medicijn);
     }
 
     @Test
     void testWijzigMedicijn_AllTrue() {
-        String input = "ja\n1\nja\nnee\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        String input = "ja\n"
+                + medicijnLijst.getMedicijnen().get(0).getId() + "\n"
+                + "ja\n"
+                + "NieuweNaam\n"
+                + "10:00\n"
+                + "nee\n";
 
-        assertTrue(wijziger.WijzigMedicijn());
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        Scanner scanner = new Scanner(in);
+
+        assertTrue(wijziger.WijzigMedicijn(scanner));
     }
+
 
     @Test
     void testWijzigMedicijn_AFalse() {
         String input = "nee\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        Scanner scanner = new Scanner(in);
 
-        assertFalse(wijziger.WijzigMedicijn());
+        assertFalse(wijziger.WijzigMedicijn(scanner));
     }
 
     @Test
     void testWijzigMedicijn_BFalse() {
-        String input = "ja\n2\nnee\n";
+        String input = "ja\0\nee\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        Scanner scanner = new Scanner(in);
 
-        assertFalse(wijziger.WijzigMedicijn());
+        assertFalse(wijziger.WijzigMedicijn(scanner));
     }
 
     @Test
     void testWijzigMedicijn_CFalse() {
-        String input = "ja\n1\nnee\n";
+        String input = "ja" + medicijnLijst.getMedicijnen().get(0).getId() + "\nnee\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        Scanner scanner = new Scanner(in);
 
-        assertFalse(wijziger.WijzigMedicijn());
+        assertFalse(wijziger.WijzigMedicijn(scanner));
     }
 }
