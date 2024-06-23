@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class ReminderSpecifiekeDagen extends HerinneringWekelijks {
+
     private final int dagen;
 
     public ReminderSpecifiekeDagen(Medicijn medicijn, String innameTijd, int dagen) {

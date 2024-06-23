@@ -1,6 +1,7 @@
 package Utils;
 
 public class WijzigingBevestigd {
+
     private final String message;
     private boolean status;
 

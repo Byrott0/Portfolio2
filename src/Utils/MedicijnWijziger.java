@@ -5,6 +5,7 @@ import Model.MedicijnLijst;
 import java.util.Scanner;
 
 public class MedicijnWijziger {
+
     private MedicijnLijst medicijnLijst;
     private WijzigingBevestigd wijzigingBevestigd = new WijzigingBevestigd();
 

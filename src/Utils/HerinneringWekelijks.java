@@ -1,10 +1,11 @@
 package Utils;
-
+//package
 import Model.Medicijn;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public abstract class HerinneringWekelijks {
+
     protected Medicijn medicijn;
     protected String innameTijd;
 
