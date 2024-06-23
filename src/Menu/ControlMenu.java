@@ -1,12 +1,16 @@
-import java.io.InputStream;
+package Menu;
+
+import Controller.GebruikerController;
+import Controller.MedicijnController;
+import Utils.*;
+import Model.*;
 import java.util.List;
 import java.util.Scanner;
 
 public class ControlMenu {
     private static MedicijnLijst medicijnLijst;
+    private static GebruikerController gebruikerController;
     private static MedicijnController medicijnController;
-    private static GebruikerBeheer gebruikerBeheer;
-    private static MedicijnBeheer medicijnBeheer;
     private static LoginService loginService;
     private static MedicijnWijziger medicijnWijziger;
     private static WijzigingBevestigd wijzigingBevestigd;
@@ -17,6 +21,7 @@ public class ControlMenu {
         this.medicijnWijziger = medicijnWijziger;
         this.wijzigingBevestigd = wijzigingBevestigd;
         this.veranderingNotificatie = new VeranderingNotificatie();
+        this.medicijnController = medicijnController;
         this.medicijnLijst = medicijnLijst;
         this.loginService = loginService;
         medicijnLijst.addObserver(this::update);
@@ -43,10 +48,9 @@ public class ControlMenu {
     public static void initialiseerObjecten() {
         medicijnLijst = new MedicijnLijst();
         controlMenu = new ControlMenu(medicijnWijziger, wijzigingBevestigd, medicijnLijst, medicijnController, loginService);
-        medicijnController = new MedicijnController();
-        gebruikerBeheer = new GebruikerBeheer();
-        medicijnBeheer = new MedicijnBeheer(medicijnLijst, medicijnController);
-        loginService = new LoginService(gebruikerBeheer, medicijnBeheer, controlMenu);
+        gebruikerController = new GebruikerController();
+        medicijnController = new MedicijnController(medicijnLijst);
+        loginService = new LoginService(gebruikerController, medicijnController, controlMenu);
         medicijnWijziger = new MedicijnWijziger();
         wijzigingBevestigd = new WijzigingBevestigd();
     }

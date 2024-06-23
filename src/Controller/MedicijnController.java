@@ -1,13 +1,28 @@
-import java.time.LocalDateTime;
+package Controller;
+
+
+import Model.*;
+import Utils.HerinneringWekelijks;
+import Utils.ReminderDagelijks;
+import Utils.ReminderSpecifiekeDagen;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class MedicijnBeheer {
+public class MedicijnController {
+    private final List<Medicijn> medicijnen;
     private MedicijnLijst medicijnLijst;
-    private MedicijnController medicijnController;
 
-    public MedicijnBeheer(MedicijnLijst medicijnLijst, MedicijnController medicijnController) {
+    public MedicijnController(MedicijnLijst medicijnLijst) {
+        this.medicijnen = new ArrayList<>();
         this.medicijnLijst = medicijnLijst;
-        this.medicijnController = medicijnController;
+    }
+
+    public Medicijn maakMedicijn(String naam) {
+        Medicijn medicijn = new Medicijn(naam);
+        this.medicijnen.add(medicijn);
+        return medicijn;
     }
 
     public void voegMedicijnenToe() {
@@ -20,7 +35,7 @@ public class MedicijnBeheer {
         for (int i = 0; i < aantalMedicijnen; i++) {
             System.out.println("Voer de naam van het medicijn in:");
             String medicijnNaam = scanner.nextLine();
-            Medicijn nieuwMedicijn = medicijnController.maakMedicijn(medicijnNaam);
+            Medicijn nieuwMedicijn = maakMedicijn(medicijnNaam);
 
             System.out.println("Kies een type herinnering:");
             System.out.println("1. ReminderSpecifiekeDagen");
@@ -38,7 +53,7 @@ public class MedicijnBeheer {
         }
     }
 
-    public void reminderInstellen(int keuze, Medicijn nieuwMedicijn, String innameTijd, Scanner scanner){
+    private void reminderInstellen(int keuze, Medicijn nieuwMedicijn, String innameTijd, Scanner scanner) {
         HerinneringWekelijks herinnering = null;
 
         switch (keuze) {

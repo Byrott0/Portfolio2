@@ -1,6 +1,11 @@
+package Controller;
+
+import Model.Gebruiker;
+
 import java.util.Scanner;
 
-public class GebruikerBeheer {
+
+public class GebruikerController {
     private Gebruiker gebruiker;
 
     public Gebruiker registreerGebruiker() {

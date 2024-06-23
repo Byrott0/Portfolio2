@@ -1,3 +1,6 @@
+import Model.Medicijn;
+import Model.MedicijnLijst;
+import Utils.MedicijnWijziger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,12 +22,12 @@ public class MedicijnWijzigerTest {
         medicijnLijst = new MedicijnLijst();
         wijziger.setMedicijnLijst(medicijnLijst);
 
-        Medicijn medicijn = new Medicijn("Test Medicijn");
+        Medicijn medicijn = new Medicijn("Test Model.Medicijn");
         medicijnLijst.addMedicijn(medicijn);
     }
 
     @Test
-    void testWijzigMedicijn_AllTrue() {
+    void testWijzigAttributenMedicijn_AllTrue() {
         String input = "ja\n"
                 + medicijnLijst.getMedicijnen().get(0).getId() + "\n"
                 + "ja\n"
@@ -40,7 +43,7 @@ public class MedicijnWijzigerTest {
 
 
     @Test
-    void testWijzigMedicijn_AFalse() {
+    void testWijzigAttributenMedicijn_AFalse() {
         String input = "nee\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         Scanner scanner = new Scanner(in);
@@ -49,7 +52,7 @@ public class MedicijnWijzigerTest {
     }
 
     @Test
-    void testWijzigMedicijn_BFalse() {
+    void testWijzigAttributenMedicijn_BFalse() {
         String input = "ja\0\nee\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         Scanner scanner = new Scanner(in);
@@ -58,7 +61,7 @@ public class MedicijnWijzigerTest {
     }
 
     @Test
-    void testWijzigMedicijn_CFalse() {
+    void testWijzigAttributenMedicijn_CFalse() {
         String input = "ja" + medicijnLijst.getMedicijnen().get(0).getId() + "\nnee\n";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         Scanner scanner = new Scanner(in);

@@ -1,13 +1,18 @@
+package Utils;
+
+import Menu.ControlMenu;
+import Controller.*;
 import java.util.Scanner;
 
 public class LoginService {
-    private final GebruikerBeheer gebruikerBeheer;
-    private final MedicijnBeheer medicijnBeheer;
+
+    private final GebruikerController gebruikerController;
+    private final MedicijnController medicijnController;
     private ControlMenu controlMenu;
 
-    public LoginService(GebruikerBeheer gebruikerBeheer, MedicijnBeheer medicijnBeheer, ControlMenu controlMenu) {
-        this.gebruikerBeheer = gebruikerBeheer;
-        this.medicijnBeheer = medicijnBeheer;
+    public LoginService(GebruikerController gebruikerController, MedicijnController medicijnBeheer, ControlMenu controlMenu) {
+        this.gebruikerController = gebruikerController;
+        this.medicijnController = medicijnBeheer;
         this.controlMenu = controlMenu;
     }
     public void voerLoginUit() {
@@ -22,8 +27,8 @@ public class LoginService {
 
         System.out.println("Wil je een account aanmaken? (ja/nee)");
         if (scanner.nextLine().equalsIgnoreCase("ja")) {
-            gebruikerBeheer.registreerGebruiker();
-            medicijnBeheer.voegMedicijnenToe();
+            gebruikerController.registreerGebruiker();
+            medicijnController.voegMedicijnenToe();
             return true;
         }
         return false;
