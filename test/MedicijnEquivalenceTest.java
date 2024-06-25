@@ -14,7 +14,7 @@ class MedicijnEquivalenceTest {
 
     @Test
     void testWijzigInnameTijdOngeldigWaarde() {
-        // Ongeldige tijd: String niet in het formaat "HH:mm"
+        // Ongeldige tijd
         Medicijn medicijn = new Medicijn("TestMedicijn");
         System.out.println(assertThrows(IllegalArgumentException.class, () -> medicijn.wijzigInnameTijd("invalid")));
     }

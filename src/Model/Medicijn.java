@@ -45,7 +45,7 @@ public class Medicijn {
             throw new NullPointerException("Innametijd mag niet null zijn.");
         }
         if (!innameTijd.matches("([01]\\d|2[0-3]):([0-5]\\d)")) {
-            throw new IllegalArgumentException("Ongeldig tijdsformaat. Gebruik HH:mm.");
+            throw new IllegalArgumentException("Ongeldig tijdstip. Gebruik een geldig tijdstip in HH:mm.");
         }
         this.innameTijd = innameTijd;
         System.out.println("Innametijd gewijzigd naar: " + innameTijd);
