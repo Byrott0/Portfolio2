@@ -9,7 +9,7 @@ public class ReminderDagelijks extends HerinneringWekelijks {
 
     public ReminderDagelijks(Medicijn medicijn, String innameTijd) {
         super(medicijn);
-        this.innameTijd = innameTijd;
+        this.geefInnametijd = innameTijd;
     }
 
     @Override
@@ -20,7 +20,7 @@ public class ReminderDagelijks extends HerinneringWekelijks {
     @Override
     protected LocalDateTime bepaalVolgendeInnameTijd(LocalDateTime nu) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime innameTijdLocal = LocalTime.parse(innameTijd, formatter);
+        LocalTime innameTijdLocal = LocalTime.parse(geefInnametijd, formatter);
         LocalDateTime volgendeInname = nu.with(innameTijdLocal);
         if (nu.isAfter(volgendeInname)) {
             volgendeInname = volgendeInname.plusDays(1);

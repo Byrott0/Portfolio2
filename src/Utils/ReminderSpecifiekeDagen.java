@@ -11,7 +11,7 @@ public class ReminderSpecifiekeDagen extends HerinneringWekelijks {
 
     public ReminderSpecifiekeDagen(Medicijn medicijn, String innameTijd, int dagen) {
         super(medicijn);
-        this.innameTijd = innameTijd;
+        this.geefInnametijd = innameTijd;
         this.dagen = dagen;
     }
 
@@ -23,7 +23,7 @@ public class ReminderSpecifiekeDagen extends HerinneringWekelijks {
     @Override
     protected LocalDateTime bepaalVolgendeInnameTijd(LocalDateTime nu) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime innameTijdLocal = LocalTime.parse(innameTijd, formatter);
+        LocalTime innameTijdLocal = LocalTime.parse(geefInnametijd, formatter);
         return nu.with(innameTijdLocal).plusDays(dagen);
     }
 

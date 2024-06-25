@@ -86,13 +86,9 @@ public class PairwiseMedicijnTest {
     @Test
     void testPairwise9() {
         assertThrows(NullPointerException.class, () -> new Medicijn(null), "Naam mag niet null zijn.");
-        // Create a valid Model.Medicijn instance
         Medicijn medicijn = new Medicijn("ValidName");
-        // Test for invalid intake time
         assertThrows(IllegalArgumentException.class, () -> medicijn.wijzigInnameTijd("24:00"));
-        // Test for invalid name
         assertThrows(IllegalArgumentException.class, () -> medicijn.setNaam(""));
-        // Test for another invalid intake time
         assertThrows(IllegalArgumentException.class, () -> medicijn.wijzigInnameTijd("25:00"));
     }
 }

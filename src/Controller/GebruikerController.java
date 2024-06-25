@@ -4,7 +4,6 @@ import Model.Gebruiker;
 
 import java.util.Scanner;
 
-
 public class GebruikerController {
     private Gebruiker gebruiker;
 

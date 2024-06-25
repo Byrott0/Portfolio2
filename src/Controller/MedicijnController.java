@@ -1,6 +1,4 @@
 package Controller;
-
-
 import Model.*;
 import Utils.HerinneringWekelijks;
 import Utils.ReminderDagelijks;
@@ -53,20 +51,25 @@ public class MedicijnController {
         }
     }
 
-    private void reminderInstellen(int keuze, Medicijn nieuwMedicijn, String innameTijd, Scanner scanner) {
+    private void verschillendeDagenInstellen(Scanner scanner, Medicijn nieuwMedicijn, String innameTijd) {
+        System.out.println("Over hoeveel dagen wil je dat de herinnering wordt ingesteld?");
+        if (scanner.hasNextInt()) {
+            int dagen = scanner.nextInt();
+            scanner.nextLine();
+            HerinneringWekelijks herinnering = new ReminderSpecifiekeDagen(nieuwMedicijn, innameTijd, dagen);
+            herinnering.zetHerinneringMelding();
+        } else {
+            System.out.println("Ongeldig. Voer een geldig cijfer in");
+            scanner.nextLine();
+        }
+    }
+
+    public void reminderInstellen(int keuze, Medicijn nieuwMedicijn, String innameTijd, Scanner scanner) {
         HerinneringWekelijks herinnering = null;
 
         switch (keuze) {
             case 1:
-                System.out.println("Over hoeveel dagen wil je dat de herinnering wordt ingesteld?");
-                if (scanner.hasNextInt()) {
-                    int dagen = scanner.nextInt();
-                    scanner.nextLine();
-                    herinnering = new ReminderSpecifiekeDagen(nieuwMedicijn, innameTijd, dagen);
-                } else {
-                    System.out.println("Ongeldig. Voer een geldig cijfer in");
-                    scanner.nextLine();
-                }
+                verschillendeDagenInstellen(scanner, nieuwMedicijn, innameTijd);
                 break;
             case 2:
                 herinnering = new ReminderDagelijks(nieuwMedicijn, innameTijd);

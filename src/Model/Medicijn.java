@@ -54,7 +54,7 @@ public class Medicijn {
 
     @Override
     public String toString() {
-        return "Model.Medicijn " +
+        return "Medicijn " +
                 "naam='" + naam + '\'' +
                 ", id=" + id +
                 ", innameTijd='" + innameTijd + '\'' +

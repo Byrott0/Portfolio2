@@ -22,7 +22,7 @@ public class MedicijnWijziger {
                 if (medicijn == null) {
                     System.out.println("Medicijn niet gevonden");
                 } else {
-                    System.out.println("Weet u zeker dat u een medicijn wilt wijzigen?");
+                    System.out.println("Weet u zeker dat u de medicijn wilt wijzigen?");
                     if (scanner.nextLine().equalsIgnoreCase("ja")) {
                         wijzigAttributenMedicijn(medicijn, scanner);
                         System.out.println("Wilt u nog een medicijn wijzigen? (ja/nee)");

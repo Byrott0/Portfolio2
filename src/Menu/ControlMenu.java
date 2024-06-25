@@ -42,7 +42,6 @@ public class ControlMenu {
     }
 
     public void update(List<Medicijn> medicijnen) {
-        System.out.println("Medicijnlijst is gewijzigd: " + medicijnen);
     }
 
     public static void initialiseerObjecten() {
@@ -53,10 +52,6 @@ public class ControlMenu {
         loginService = new LoginService(gebruikerController, medicijnController, controlMenu);
         medicijnWijziger = new MedicijnWijziger();
         wijzigingBevestigd = new WijzigingBevestigd();
-    }
-
-    public static ControlMenu getControlMenuInstance() {
-        return controlMenu;
     }
 
     public static LoginService getLoginServiceInstance() {

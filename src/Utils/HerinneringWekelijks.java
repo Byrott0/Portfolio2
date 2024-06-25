@@ -1,5 +1,4 @@
 package Utils;
-//package
 import Model.Medicijn;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -7,7 +6,7 @@ import java.time.temporal.ChronoUnit;
 public abstract class HerinneringWekelijks {
 
     protected Medicijn medicijn;
-    protected String innameTijd;
+    protected String geefInnametijd;
 
     public HerinneringWekelijks(Medicijn medicijn) {
         this.medicijn = medicijn;
@@ -26,5 +25,4 @@ public abstract class HerinneringWekelijks {
     protected abstract LocalDateTime bepaalVolgendeInnameTijd(LocalDateTime nu);
 
     protected abstract void registreerMelding(LocalDateTime volgendeInname);
-
 }
